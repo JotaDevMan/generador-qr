@@ -1,25 +1,29 @@
 .qr-generado {
     padding: 20px;
     margin: 20px auto;
-    border: 5px solid #000; /* Añade un borde */
-    border-radius: 10px; /* Añade esquinas redondeadas */
-    display: block; /* Ajusta el tamaño del marco al contenido */
-    background-color: #fff; /* Añade un fondo blanco */
-    text-align: center; /* Centra el contenido dentro del contenedor */
+    border: 5px solid #000; 
+    border-radius: 10px; 
+    display: inline-block; 
+    background-color: #fff; 
+    text-align: center; 
+    width: auto; 
+    height: auto; 
 }
 
 .qr-container {
-    text-align: center; /* Centra el contenido dentro del contenedor */
-    margin-top: 20px; /* Añade un margen superior para separación */
-    display: flex; /* Utiliza flexbox para centrar el contenido */
-    flex-direction: column; /* Coloca los elementos en una columna */
-    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; 
+    margin-top: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: auto; 
+    height: auto; 
 }
 
 .boton-descarga {
-    position: relative; /* Necesario para el pseudo-elemento */
-    overflow: hidden; /* Esconde el pseudo-elemento fuera del botón */
-    margin-top: 10px; /* Añade un margen superior para separar el botón del QR */
+    position: relative; 
+    overflow: hidden; 
+    margin-top: 10px; 
     padding: 16px 32px;
     border: none;
     border-radius: 12px;
@@ -28,8 +32,8 @@
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s ease; /* Suaviza el cambio de color */
-    z-index: 1; /* Asegura que el texto esté en frente */
+    transition: color 0.3s ease; 
+    z-index: 1; 
 }
 
 .boton-descarga:hover::before {
@@ -60,27 +64,54 @@
 }
 
 .texto-agregado {
-    margin-top: 10px; /* Añade un margen superior para separar el texto del botón */
-    font-size: 20px; /* Tamaño de fuente adecuado */
-    color: #333; /* Color del texto */
-    text-decoration: none; /* Quita el subrayado del enlace */
+    margin-top: 10px; 
+    font-size: 20px; 
+    color: #333; 
+    text-decoration: none;
 }
 
 .texto-agregado .highlight {
-    color: #333; /* Color inicial del nombre */
-    transition: color 0.3s ease; /* Suaviza el cambio de color */
+    color: #333; 
+    transition: color 0.3s ease; 
 }
 
 .texto-agregado .highlight:hover {
-    color: rgb(255, 0, 255); /* Cambia el color al pasar el ratón */
+    color: rgb(255, 0, 255); 
 }
 
 .highlight {
-    color: #333; /* Color inicial del nombre */
-    margin-left: 5px; /* Añade un margen a la izquierda */
-    text-decoration: none; /* Quita el subrayado del enlace */
+    color: #333; 
+    margin-left: 5px;
+    text-decoration: none;
 }
 
 .highlight:hover {
-    color: purple; /* Cambia el color al pasar el ratón */
+    color: purple; 
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content button {
+    margin: 10px;
 }

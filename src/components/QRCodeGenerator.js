@@ -1,26 +1,42 @@
-// src/components/QRCodeGenerator.js
-import React, { useState, useRef } from 'react';
-import QRCode from 'react-qr-code';
-import { toPng } from 'html-to-image';
+import React, { useState, useRef, useEffect } from 'react';
+import QRCode from 'qrcode';
 import '../qr.css';
 
-function QRCodeGenerator() {
+function GeneradorCodigoQR() {
   const [input, setInput] = useState('');
   const [qrValue, setQrValue] = useState('');
-  const qrRef = useRef();
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const canvasRef = useRef();
 
-  const handleGenerateQR = () => {
-    setQrValue(input);
+  const manejarGenerarQR = () => {
+    setMostrarModal(true);
   };
 
-  const handleDownloadQR = async () => {
-    if (qrRef.current) {
-      const dataUrl = await toPng(qrRef.current);
+  const manejarConfirmarQR = () => {
+    setQrValue(input);
+    setMostrarModal(false);
+  };
+
+  const manejarDescargarQR = () => {
+    if (canvasRef.current) {
+      const dataUrl = canvasRef.current.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = dataUrl;
-      link.download = 'qr-code.png';
+      link.download = 'qr-generado.png';
       link.click();
     }
+  };
+
+  useEffect(() => {
+    if (qrValue) {
+      QRCode.toCanvas(canvasRef.current, qrValue, { width: 256 }, (error) => {
+        if (error) console.error(error);
+      });
+    }
+  }, [qrValue]);
+
+  const manejarCerrarModal = () => {
+    setMostrarModal(false);
   };
 
   return (
@@ -29,28 +45,37 @@ function QRCodeGenerator() {
         type="text" 
         value={input} 
         onChange={(e) => setInput(e.target.value)} 
-        placeholder="Enter URL or text" 
+        placeholder="Ingresar URL" 
       />
-      <button onClick={handleGenerateQR}>Generate QR</button>
+      <button onClick={manejarGenerarQR}>Generar QR</button>
       {qrValue && (
         <div className='qr-container'>
-          <div className='qr-generado' ref={qrRef}>
-            <QRCode value={qrValue} />
-          </div>
-          <button className='boton-descarga' onClick={handleDownloadQR}>
-            <span>Download QR</span>
+          <canvas ref={canvasRef}></canvas>
+          <button className='boton-descarga' onClick={manejarDescargarQR}>
+            <span>Descargar QR</span>
           </button>
           <a 
             className='texto-agregado' 
             href='https://www.youtube.com/shorts/QR8CVkmJhLU' 
             target='_blank' 
             rel='noopener noreferrer'>
-            Animacion del boton by: <span className='highlight'>MiduDev</span>
+            Animación del botón por: <span className='highlight'>MiduDev</span>
           </a>
+        </div>
+      )}
+      {mostrarModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Confirmación QR</h2>
+            <p>¿Estás seguro de generar este QR?</p>
+            <p><strong>{input}</strong></p>
+            <button onClick={manejarConfirmarQR}>Confirmar</button>
+            <button onClick={manejarCerrarModal}>Cancelar</button>
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-export default QRCodeGenerator;
+export default GeneradorCodigoQR;
