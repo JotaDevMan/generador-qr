@@ -1,0 +1,86 @@
+.qr-generado {
+    padding: 20px;
+    margin: 20px auto;
+    border: 5px solid #000; /* Añade un borde */
+    border-radius: 10px; /* Añade esquinas redondeadas */
+    display: block; /* Ajusta el tamaño del marco al contenido */
+    background-color: #fff; /* Añade un fondo blanco */
+    text-align: center; /* Centra el contenido dentro del contenedor */
+}
+
+.qr-container {
+    text-align: center; /* Centra el contenido dentro del contenedor */
+    margin-top: 20px; /* Añade un margen superior para separación */
+    display: flex; /* Utiliza flexbox para centrar el contenido */
+    flex-direction: column; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.boton-descarga {
+    position: relative; /* Necesario para el pseudo-elemento */
+    overflow: hidden; /* Esconde el pseudo-elemento fuera del botón */
+    margin-top: 10px; /* Añade un margen superior para separar el botón del QR */
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    background: black;
+    color: azure;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Suaviza el cambio de color */
+    z-index: 1; /* Asegura que el texto esté en frente */
+}
+
+.boton-descarga:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, red, blue, deeppink, blue, red, blue, deeppink, blue);
+    background-size: 800%;
+    border-radius: 12px;
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.texto-agregado {
+    margin-top: 10px; /* Añade un margen superior para separar el texto del botón */
+    font-size: 20px; /* Tamaño de fuente adecuado */
+    color: #333; /* Color del texto */
+    text-decoration: none; /* Quita el subrayado del enlace */
+}
+
+.texto-agregado .highlight {
+    color: #333; /* Color inicial del nombre */
+    transition: color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+.texto-agregado .highlight:hover {
+    color: rgb(255, 0, 255); /* Cambia el color al pasar el ratón */
+}
+
+.highlight {
+    color: #333; /* Color inicial del nombre */
+    margin-left: 5px; /* Añade un margen a la izquierda */
+    text-decoration: none; /* Quita el subrayado del enlace */
+}
+
+.highlight:hover {
+    color: purple; /* Cambia el color al pasar el ratón */
+}
